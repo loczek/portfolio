@@ -42,10 +42,14 @@
     });
 
     const slider = document.querySelector<HTMLElement>(".slider-container")!;
+    const sliderInner = document.querySelector<HTMLElement>(".slider-inner")!;
     const cursor = document.querySelector<HTMLElement>(".cursor")!;
     const dot = document.querySelector<HTMLElement>(".dot")!;
 
     slider.addEventListener("wheel", (event: WheelEvent) => {
+      const nextSy = sy + event.deltaY;
+      if (nextSy < 0) return;
+      if (nextSy > sliderInner.clientWidth - slider.clientWidth + 100) return;
       sy += event.deltaY;
     });
 
@@ -71,11 +75,13 @@
         cursor.style.height = "16px";
         dot.style.width = "8px";
         dot.style.height = "8px";
+        dot.style.backgroundColor = "#6c19d6";
       } else {
         cursor.style.width = "32px";
         cursor.style.height = "32px";
         dot.style.width = "4px";
         dot.style.height = "4px";
+        dot.style.backgroundColor = "#ddd";
       }
 
       //We calculate our container position by linear interpolation method
@@ -83,7 +89,7 @@
 
       dx = Math.floor(dx * 100) / 100;
 
-      slider.scrollLeft = dx;
+      sliderInner.style.left = -dx.toString() + "px";
 
       cursorVX = lerp(cursorVX, cursorX, 0.1);
       cursorVY = lerp(cursorVY, cursorY, 0.1);
@@ -182,12 +188,6 @@
             visitLink="https://chrome.google.com/webstore/detail/42fm/djkopjknjkhhhlbpaooiffegfhibkdka"
           />
         </div>
-        <!-- <div class="slide center">
-          <Project
-            title="Asume"
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, delectus. Voluptatibus ut aspernatur architecto, vel culpa iste, illo dolor aliquid ullam modi a quam alias, corporis maiores nesciunt ea recusandae?"
-          />
-        </div> -->
       </div>
     </div>
   </div>
@@ -205,25 +205,24 @@
     height: 32px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    border: #fff solid 2px;
+    border: #ddd solid 2px;
     pointer-events: none;
     transform-origin: center;
-    transition: width 200ms ease-in-out, height 200ms ease-in-out,
-      transform 200ms ease-in-out;
+    transition: width 150ms ease-in-out, height 150ms ease-in-out,
+      transform 150ms ease-in-out;
     z-index: 2;
   }
   .dot {
     content: "";
     position: absolute;
     pointer-events: none;
-
     width: 4px;
     height: 4px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background: white;
-    transition: width 200ms ease-in-out, height 200ms ease-in-out,
-      transform 200ms ease-in-out;
+    background: #ddd;
+    transition: width 150ms ease-in-out, height 150ms ease-in-out,
+      transform 150ms ease-in-out, background 150ms ease-in-out;
   }
   .column-wrapper {
     width: 100%;
@@ -245,8 +244,12 @@
     height: 100%;
   }
   .slider-inner {
+    /* SLIDE COUNT * 100% */
     width: 200%;
     display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
   }
   .center {
     display: flex;
@@ -256,7 +259,6 @@
   .slide {
     width: 100%;
     height: 100%;
-    /* scroll-snap-align: center; */
   }
   .progress {
     width: 256px;
@@ -282,19 +284,16 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    /* padding: 64px 128px; */
     padding: 64px;
     overflow: hidden;
     position: relative;
   }
 
   .slider-container {
-    /* background-color: #6c19d6; */
     height: 100%;
     width: 100%;
-    /* overflow-x: scroll; */
     display: -webkit-box;
-    overflow: scroll hidden;
-    /* scroll-snap-type: x proximity; */
+    position: relative;
+    overflow: hidden;
   }
 </style>
