@@ -17,6 +17,29 @@
     mouseDown: boolean;
 
   onMount(() => {
+    let options: IntersectionObserverInit = {
+      root: document.querySelector(".slider-container"),
+      rootMargin: "0px",
+      threshold: 1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("isVisible");
+          return;
+        }
+
+        entry.target.classList.add("isVisible");
+      });
+    }, options);
+
+    const projects = document.querySelectorAll(".img-wrapper")!;
+
+    projects.forEach((project) => {
+      observer.observe(project);
+    });
+
     const slider = document.querySelector<HTMLElement>(".slider-container")!;
     const cursor = document.querySelector<HTMLElement>(".cursor")!;
     const dot = document.querySelector<HTMLElement>(".dot")!;
