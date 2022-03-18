@@ -1,7 +1,13 @@
 <script lang="ts">
-  import src from "../assets/one.jpg";
+  export let src: string;
   export let title: string;
   export let description: string;
+  export let codeLink: string;
+  export let visitLink: string;
+
+  function handleClick(link: string) {
+    window.open(link);
+  }
 </script>
 
 <div class="wrapper">
@@ -12,7 +18,8 @@
     <h2>{title}</h2>
     <p>{description}</p>
     <div class="button-wrapper">
-      <button>Code</button><button>Visit</button>
+      <button on:click={() => handleClick(codeLink)}>Code</button>
+      <button on:click={() => handleClick(visitLink)}>Visit</button>
     </div>
   </div>
 </div>
@@ -23,11 +30,28 @@
     gap: 128px;
   }
 
+  :global(.isVisible) {
+    filter: grayscale(1);
+  }
+
   .img-wrapper {
     position: relative;
+    transition: filter 500ms linear, transform 200ms linear;
+  }
+
+  .img-wrapper:hover {
+    transform: translate(-16px, 16px);
+  }
+  .img-wrapper:hover::before {
+    border-top-right-radius: 32px;
+    border-bottom-left-radius: 0;
+    left: 0px;
+    bottom: 0px;
   }
 
   .img-wrapper::before {
+    transition: all 200ms ease-in-out;
+    box-sizing: border-box;
     content: "";
     position: absolute;
     width: 512px;
@@ -83,6 +107,11 @@
     font-size: 23px;
     line-height: 28px;
     cursor: none;
-    /* cursor: pointer; */
+    transition: all 250ms ease-in-out;
+  }
+
+  button:hover {
+    background: #ffffff;
+    color: #6c19d6;
   }
 </style>
