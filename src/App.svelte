@@ -2,6 +2,7 @@
   import anime from "animejs";
   import { onMount } from "svelte";
   import Project from "./lib/Project.svelte";
+  import project2 from "./assets/two.png";
 
   const lerp = (x: number, y: number, a: number) => x * (1 - a) + y * a;
 
@@ -174,8 +175,11 @@
         </div>
         <div class="slide center">
           <Project
-            title="SPACEXWEB"
-            description="SPACEXWEB is a web application that allows you to search for any spacex launch and see the details of the launch. The application is built with ReactJS and uses the SpaceX API to fetch the data. "
+            src={project2}
+            title="42FM"
+            description="This is a extension for Twitch that allows you to listen to music on while the streamer is not live. The extension is built with React and uses the sockets to communicate with the Node backend to synchronize the music between users."
+            codeLink="https://github.com/42fm/42fm"
+            visitLink="https://chrome.google.com/webstore/detail/42fm/djkopjknjkhhhlbpaooiffegfhibkdka"
           />
         </div>
         <!-- <div class="slide center">
