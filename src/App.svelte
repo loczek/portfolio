@@ -1,8 +1,9 @@
 <script lang="ts">
   import anime from "animejs";
   import { onMount } from "svelte";
-  import Project from "./lib/Project.svelte";
+  import project3 from "./assets/next.jpg";
   import project2 from "./assets/two.png";
+  import Project from "./lib/Project.svelte";
 
   const lerp = (x: number, y: number, a: number) => x * (1 - a) + y * a;
 
@@ -188,6 +189,15 @@
             visitLink="https://chrome.google.com/webstore/detail/42fm/djkopjknjkhhhlbpaooiffegfhibkdka"
           />
         </div>
+        <div class="slide center">
+          <Project
+            src={project3}
+            title="Next Snippets"
+            description="A VScode extension that adds snippets for Next. Has both snippets written in Javascript and Typescript"
+            codeLink="https://github.com/loczek/next-snippets"
+            visitLink="https://marketplace.visualstudio.com/items?itemName=loczek.next-js-ts-snippets&ssr=false#review-details"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -245,7 +255,7 @@
   }
   .slider-inner {
     /* SLIDE COUNT * 100% */
-    width: 200%;
+    width: 300%;
     display: flex;
     position: absolute;
     top: 0;
