@@ -195,7 +195,7 @@
             title="Next Snippets"
             description="A VScode extension that adds snippets for Next. Has both snippets written in Javascript and Typescript"
             codeLink="https://github.com/loczek/next-snippets"
-            visitLink="https://marketplace.visualstudio.com/items?itemName=loczek.next-js-ts-snippets&ssr=false#review-details"
+            visitLink="https://marketplace.visualstudio.com/items?itemName=loczek.next-js-ts-snippets"
           />
         </div>
       </div>
